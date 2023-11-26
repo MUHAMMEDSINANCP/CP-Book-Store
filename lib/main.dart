@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
         primaryColor: TColor.primary,
         fontFamily: 'SF Pro Text',
       ),
-      home: StreamBuilder<User?>(
+       home: StreamBuilder<User?>(
           stream: FirebaseAuth.instance.authStateChanges(),
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data != null) {
@@ -39,9 +39,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-
-
-
-
-

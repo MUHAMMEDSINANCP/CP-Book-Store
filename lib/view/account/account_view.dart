@@ -1,16 +1,41 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cp_book_store/common/color_extension.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../common_widget/your_review_row.dart';
 
 class AccountView extends StatefulWidget {
-  const AccountView({super.key});
+  const AccountView({
+    super.key,
+  });
 
   @override
   State<AccountView> createState() => _AccountViewState();
 }
 
 class _AccountViewState extends State<AccountView> {
+  String userName = "";
+  @override
+  void initState() {
+    super.initState();
+    fetchUserName();
+  }
+
+  void fetchUserName() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      DocumentSnapshot userSnapshot = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .get();
+
+      setState(() {
+        userName = userSnapshot['name'];
+      });
+    }
+  }
+
   List purArr = ["assets/img/p1.jpg", "assets/img/p2.jpg", "assets/img/p3.jpg"];
 
   List sResultArr = [
@@ -64,8 +89,9 @@ class _AccountViewState extends State<AccountView> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Andrew Tate",
+                          userName,
                           style: TextStyle(
+                              overflow: TextOverflow.ellipsis,
                               color: TColor.text,
                               fontSize: 20,
                               fontWeight: FontWeight.w700),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cp_book_store/view/main_tab/main_tab_view.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -47,12 +48,17 @@ class _SignUpViewState extends State<SignUpView> {
       });
 
       UserCredential userCredential = await FirebaseAuth.instance
-          .createUserWithEmailAndPassword(
-              password: txtPassword.text.trim(), email: txtEmail.text.trim());
-      if (mounted) {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => const MainTabView()));
-      }
+          .createUserWithEmailAndPassword(password: password, email: email);
+
+      // Save user details including name to Firebase or your database
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(userCredential.user!.uid)
+          .set({
+        'name': name,
+        'email': email,
+        // Add other user details if needed
+      });
 
       if (context.mounted) {
         ScaffoldMessenger.of(context).showSnackBar((const SnackBar(
@@ -67,17 +73,10 @@ class _SignUpViewState extends State<SignUpView> {
               ),
             ))));
       }
-      // String userId = userCredential.user!.uid;
-
-      // await FirebaseFirestore.instance.collection('users').doc(userId).set(
-      //   {
-      //     'id': userId,
-      //     'name': nameController.text,
-      //     'username': usernameController.text,
-      //     'following': [],
-      //     'followers': [],
-      //   },
-      // );
+      if (mounted) {
+        Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => const MainTabView()));
+      }
     } on FirebaseException catch (e) {
       switch (e.code) {
         case 'weak-password':
@@ -212,7 +211,7 @@ class _SignUpViewState extends State<SignUpView> {
                   ),
                   controller: txtPassword,
                   hintText: "Password",
-                  obscureText: isPasswordVisible,
+                  obscureText: !isPasswordVisible,
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return "Please enter a password.";

@@ -45,7 +45,7 @@ class _WelcomeViewState extends State<WelcomeView> {
                     ),
                   ),
                   SizedBox(
-                    height: media.width * 0.28,
+                    height: media.width * 0.2,
                   ),
                   RoundButton(
                       title: "Sign In",

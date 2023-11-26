@@ -42,7 +42,6 @@ class _MainTabViewState extends State<MainTabView>
     var media = MediaQuery.of(context).size;
 
     return Scaffold(
-      key: sideMenuScaffoldKey,
       endDrawer: Drawer(
         backgroundColor: Colors.transparent,
         elevation: 0,
