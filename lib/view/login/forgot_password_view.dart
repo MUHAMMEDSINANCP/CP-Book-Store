@@ -11,8 +11,8 @@ class ForgotPasswordView extends StatefulWidget {
 }
 
 class _ForgotPasswordViewState extends State<ForgotPasswordView> {
-   TextEditingController txtEmail = TextEditingController();
- 
+  TextEditingController txtEmail = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,17 +43,14 @@ class _ForgotPasswordViewState extends State<ForgotPasswordView> {
             const SizedBox(
               height: 15,
             ),
-     
             RoundTextfield(
               controller: txtEmail,
               hintText: "Email Address",
               keyboardType: TextInputType.emailAddress,
             ),
- 
             const SizedBox(
               height: 25,
             ),
-         
             RoundLineButton(
               title: "Submit",
               onPressed: () {},

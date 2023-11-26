@@ -33,43 +33,55 @@ class RoundButton extends StatelessWidget {
 class RoundLineButton extends StatelessWidget {
   final String title;
   final VoidCallback onPressed;
+  final bool isLoading;
 
   const RoundLineButton(
-      {super.key, required this.title, required this.onPressed});
+      {super.key,
+      required this.title,
+      required this.onPressed,
+      this.isLoading = false});
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      style: ButtonStyle(
-        backgroundColor: getColor(Colors.white, TColor.primary),
-        foregroundColor: getColor(TColor.primary, Colors.white),
-        shadowColor:
-            MaterialStateProperty.resolveWith((states) => TColor.primary),
-        minimumSize: MaterialStateProperty.resolveWith(
-          (states) => const Size(double.maxFinite, 50),
-        ),
-        elevation: MaterialStateProperty.resolveWith(
-            (states) => states.contains(MaterialState.pressed) ? 1 : 0),
-        shape: MaterialStateProperty.resolveWith(
-          (states) => RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(20),
-            side: BorderSide(
-                width: 1,
-                color: states.contains(MaterialState.pressed)
-                    ? Colors.transparent
-                    : TColor.primary),
+        style: ButtonStyle(
+          backgroundColor: getColor(Colors.white, TColor.primary),
+          foregroundColor: getColor(TColor.primary, Colors.white),
+          shadowColor:
+              MaterialStateProperty.resolveWith((states) => TColor.primary),
+          minimumSize: MaterialStateProperty.resolveWith(
+            (states) => const Size(double.maxFinite, 50),
+          ),
+          elevation: MaterialStateProperty.resolveWith(
+              (states) => states.contains(MaterialState.pressed) ? 1 : 0),
+          shape: MaterialStateProperty.resolveWith(
+            (states) => RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+              side: BorderSide(
+                  width: 1,
+                  color: states.contains(MaterialState.pressed)
+                      ? Colors.transparent
+                      : TColor.primary),
+            ),
           ),
         ),
-      ),
-      onPressed: onPressed,
-      child: Text(
-        title,
-        style: const TextStyle(
-          fontSize: 17,
-          fontWeight: FontWeight.w500,
-        ),
-      ),
-    );
+        onPressed: onPressed,
+        child: isLoading
+            ? const SizedBox(
+                height: 26,
+                width: 26,
+                child: CircularProgressIndicator(
+                  strokeWidth: 5,
+                  color: Colors.green,
+                ),
+              )
+            : Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 17,
+                  fontWeight: FontWeight.w500,
+                ),
+              ));
   }
 
   MaterialStateProperty<Color> getColor(Color color, Color colorPressed) {
@@ -77,7 +89,6 @@ class RoundLineButton extends StatelessWidget {
         states.contains(MaterialState.pressed) ? colorPressed : color);
   }
 }
-
 
 class MiniRoundButton extends StatelessWidget {
   final String title;
@@ -90,17 +101,17 @@ class MiniRoundButton extends StatelessWidget {
     return ElevatedButton(
       onPressed: onPressed,
       style: ButtonStyle(
-        backgroundColor:  MaterialStateProperty.resolveWith((states) => TColor.primary),
-        foregroundColor:  MaterialStateProperty.resolveWith((states) => Colors.white),
+        backgroundColor:
+            MaterialStateProperty.resolveWith((states) => TColor.primary),
+        foregroundColor:
+            MaterialStateProperty.resolveWith((states) => Colors.white),
         shadowColor:
             MaterialStateProperty.resolveWith((states) => TColor.primary),
-        
-         minimumSize: MaterialStateProperty.resolveWith(
-            (states) => const Size(150, 35)),
+        minimumSize:
+            MaterialStateProperty.resolveWith((states) => const Size(150, 35)),
         shape: MaterialStateProperty.resolveWith(
           (states) => RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
-           
           ),
         ),
       ),

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "75090155947",
+    "project_id": "cp-book-store",
+    "storage_bucket": "cp-book-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:75090155947:android:ed36cb730c5f613d14daee",
+        "android_client_info": {
+          "package_name": "com.example.cp_book_store"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAgO3T91_6KDmsmzTjgGO-aTtTb6bwv1nw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

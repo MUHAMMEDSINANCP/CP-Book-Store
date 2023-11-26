@@ -12,7 +12,7 @@ class MainTabView extends StatefulWidget {
   State<MainTabView> createState() => _MainTabViewState();
 }
 
-GlobalKey<ScaffoldState> sideMenuScaffoldKey = GlobalKey<ScaffoldState>();
+final GlobalKey<ScaffoldState> sideMenuScaffoldKey = GlobalKey<ScaffoldState>();
 
 class _MainTabViewState extends State<MainTabView>
     with TickerProviderStateMixin {
