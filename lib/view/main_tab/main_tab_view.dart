@@ -198,10 +198,7 @@ class _MainTabViewState extends State<MainTabView>
           const SearchView(),
           Scaffold(
             appBar: AppBar(
-              leading: const Icon(
-                Icons.arrow_back_ios,
-                size: 21,
-              ),
+              automaticallyImplyLeading: false,
               backgroundColor: TColor.primary,
               title: const Text(
                 "WishList",

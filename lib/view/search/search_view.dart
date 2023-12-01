@@ -100,6 +100,7 @@ class _SearchViewState extends State<SearchView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Row(
@@ -148,13 +149,13 @@ class _SearchViewState extends State<SearchView> {
                           await Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) =>  SearchFilterView(didFilter: (fObj){
-                                  if(mounted){
-                                    setState(() {
-                                      
-                                    });
-                                  }                               
-                              },),
+                              builder: (context) => SearchFilterView(
+                                didFilter: (fObj) {
+                                  if (mounted) {
+                                    setState(() {});
+                                  }
+                                },
+                              ),
                             ),
                           );
                           endEditing();
